@@ -1,0 +1,137 @@
+.margin-center{
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+.heading{
+  font-size: 3rem;
+}
+.start-free-btn{
+  padding: 0.75rem 1.2rem;
+  background-color: black;
+}
+.heading-margin{
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
+.npm-package-head{
+  padding: 0.75rem 1.2rem;
+  background-color:#2f3337;
+  border: 1px solid #2f3337;
+  font-family: "Fira Code", monospace;
+  font-size:14px;
+}
+.span-pre{
+  color: rgb(169, 169, 169);
+  font-weight: 600;
+}
+.span-npm{
+  color: rgb(202, 102, 8);
+  font-weight: 600;
+}
+.span-package{
+  color: rgb(255, 255, 255);
+}
+.c-pointer{
+  cursor: pointer;
+}
+.start-for-free{
+font-size:3.5rem;
+}
+.footer-link {
+  color: #cfcfcf;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+
+
+/* Add to your existing CSS file */
+.hover-bg-light:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+/* Optional: Animation for menu items */
+.drawer-menu-item {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+  }
+  
+  .heading-margin {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  
+  .start-for-free {
+    font-size: 2rem;
+  }
+  
+  .npm-package-head {
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    width: 100%;
+  }
+  
+  .npm-package-head .d-flex {
+    flex-wrap: wrap;
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .heading {
+    font-size: 2rem;
+  }
+  
+  .start-for-free {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  
+  .heading-margin {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .npm-package-head {
+    padding: 1.2rem;
+    font-size: 11px;
+  }
+  
+  .npm-package-head .d-flex.gap-4 {
+    gap: 0.5rem !important;
+  }
+  .hd-txt{
+    padding: 0 2rem;
+  }
+  .xsas{
+    padding: 5rem
+  }
+  .uioo{
+    padding: 1rem 2rem;
+  }
+  .start-free-btn{
+    padding: 1rem 2rem;
+  }
+}
