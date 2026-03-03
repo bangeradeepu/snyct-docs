@@ -26,7 +26,7 @@ aadharNumber: "Return only the 12 digit aadhar number without any spaces or dash
   const globalInstruction = `//Global Instructions apply to all fields and override field level instructions
 instructions: "Return all names in Title Case format."`;
 
-  const npmCommand = "npm i digimithra-autofill-ai-sdk";
+  const npmCommand = "npm i snyct-ai";
 
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
@@ -72,7 +72,7 @@ instructions: "Return all names in Title Case format."`;
                     <span className="span-npm">npm</span>
                     <span className="span-i">i</span>
                     <span className="">
-                      digimithra-autofill-ai-sdk
+                      snyct-ai
                     </span>
                   </div>
                   <div className="text-dark">
@@ -207,16 +207,15 @@ instructions: "Return all names in Title Case format."`;
       <div className="container py-4">
         <div className="border border-dark p-5 bg-white">
           <div className="row align-items-center g-4">
-            <div className="col-lg-8">
-              <h3 className="fw-bold mb-3" style={{ fontSize: '2rem', letterSpacing: '-0.5px' }}>
-                Start your free trial
-              </h3>
-              <p className="text-secondary mb-0" style={{ fontSize: '18px', lineHeight: '1.6' }}>
-                Get <span className="fw-bold text-dark">200 document extractions free</span>. 
-                Then continue for just <span className="fw-bold text-dark">$2/month</span> with 
-                up to <span className="fw-bold text-dark">1000 requests</span>.
-              </p>
-            </div>
+           <div className="col-lg-8">
+  <h3 className="fw-bold mb-3" style={{ fontSize: '2rem', letterSpacing: '-0.5px' }}>
+    Start your free trial
+  </h3>
+  <p className="text-secondary mb-0" style={{ fontSize: '18px', lineHeight: '1.6' }}>
+    Login now and get <span className="fw-bold text-dark">₹100 free credits</span> 
+    (that's <span className="fw-bold text-dark">1,000 extractions</span>) to test our service.
+  </p>
+</div>
             <div className="col-lg-4 text-lg-end">
               <div className="d-inline-block bg-dark text-white px-5 py-3 c-pointer hover-lift" style={{ border: '1px solid #000' }} onClick={()=>navigate('/login')}>
                 <span className="fw-semibold">Generate API key</span>

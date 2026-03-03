@@ -4,23 +4,23 @@ const Pricing = () => {
   const features = [
     {
       title: "Welcome Credit",
-      amount: "$2 FREE",
-      description: "Get $2 credit on first login",
+      amount: "₹100 FREE",
+      description: "Get ₹100 credit on first login",
       documents: "≈ 1,000 documents",
       icon: "bi-gem"
     },
     {
       title: "Pay As You Go",
-      amount: "$0.002 per document",
-      description: "~500 documents per $1",
+      amount: "₹0.10 per document",
+      description: "~10 documents per ₹1",
       documents: "Only pay for what you use",
       icon: "bi-lightning-charge"
     },
     {
       title: "Minimum Recharge",
-      amount: "$5 minimum",
+      amount: "₹100 minimum",
       description: "Auto recharge when balance runs low",
-      documents: "≈ 2,500 documents",
+      documents: "≈ 1,000 documents",
       icon: "bi-arrow-repeat"
     }
   ];
@@ -37,7 +37,7 @@ const Pricing = () => {
             Simple, Transparent
           </h1>
           <p className="text-secondary mx-auto" style={{ maxWidth: '500px', fontSize: '18px' }}>
-            Start with $2 free credit. Pay only for what you use.
+            Start with ₹100 free credit. Pay only for what you use.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ const Pricing = () => {
                 <div>
                   <h5 className="fw-bold mb-1">First Time Users</h5>
                   <p className="text-secondary mb-0">
-                    Get <span className="fw-bold text-dark">$2 credit</span> instantly on login • Approximately 1,000 documents free
+                    Get <span className="fw-bold text-dark">₹100 credit</span> instantly on login • Approximately 1,000 documents free
                   </p>
                 </div>
               </div>
@@ -104,8 +104,8 @@ const Pricing = () => {
         <div className="text-center mt-5 pt-3">
           <div className="d-inline-block border border-dark px-4 py-2">
             <p className="mb-0 text-secondary" style={{ fontSize: '14px' }}>
-              <span className="fw-bold text-dark">$1</span> ≈ 500 documents • 
-              <span className="fw-bold text-dark mx-2">Min recharge $5</span> • 
+              <span className="fw-bold text-dark">₹1</span> ≈ 10 documents • 
+              <span className="fw-bold text-dark mx-2">Min recharge ₹100</span> • 
               Credits never expire
             </p>
           </div>

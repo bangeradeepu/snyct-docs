@@ -14,8 +14,8 @@ const Dashboard = () => {
   const [processingPayment, setProcessingPayment] = useState(false);
   const [paymentHistory, setPaymentHistory] = useState([]);
 
-  // Constants
-  const EXTRACTION_COST = 0.01; // $0.01 per extraction
+  // Constants - FIXED: ₹0.10 per extraction, not 0.01
+  const EXTRACTION_COST = 0.10; // ₹0.10 per extraction
 
   // State for real data
   const [userData, setUserData] = useState({
@@ -166,31 +166,43 @@ const Dashboard = () => {
     alert('API key copied to clipboard!');
   };
 
-  // Handle Razorpay payment
+  // RAZORPAY PAYMENT HANDLER
   const handleRazorpayPayment = async (amount) => {
     try {
       setProcessingPayment(true);
+      console.log('💰 Starting payment for ₹', amount);
 
-      // 1. Create order on backend
+      // Step 1: Check if Razorpay is loaded
+      if (!window.Razorpay) {
+        console.log('Razorpay not loaded, loading script...');
+        await loadRazorpayScript();
+      }
+
+      // Step 2: Create order on backend
+      console.log('Creating order for amount:', amount);
       const orderResponse = await api.post('/payment/create-order', { amount });
       
       if (!orderResponse.data.success) {
-        throw new Error('Failed to create order');
+        throw new Error(orderResponse.data.details || 'Failed to create order');
       }
 
       const { order, key_id } = orderResponse.data;
+      console.log('Order created:', order);
 
-      // 2. Initialize Razorpay checkout
+      // Step 3: Prepare Razorpay options
       const options = {
         key: key_id,
         amount: order.amount,
         currency: order.currency,
         name: 'DigiMithra Autofill AI',
-        description: `Add ${amount} credits`,
+        description: `Add ₹${amount} credits`,
         order_id: order.id,
+        image: 'https://digimithra.com/logo.png',
         handler: async (response) => {
+          console.log('Payment successful:', response);
+          
           try {
-            // 3. Verify payment on backend
+            // Step 4: Verify payment on backend
             const verifyResponse = await api.post('/payment/verify-payment', {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
@@ -199,7 +211,7 @@ const Dashboard = () => {
             });
 
             if (verifyResponse.data.success) {
-              alert(`✅ Payment successful! ${amount} credits added to your account.`);
+              alert(`✅ Payment successful! ₹${amount} credits added to your account.`);
               
               // Refresh user data
               const userResponse = await api.get('/auth/me');
@@ -216,8 +228,10 @@ const Dashboard = () => {
               alert('❌ Payment verification failed');
             }
           } catch (error) {
-            console.error('Payment verification error:', error);
+            console.error('Verification error:', error);
             alert('Failed to verify payment');
+          } finally {
+            setProcessingPayment(false);
           }
         },
         prefill: {
@@ -229,20 +243,45 @@ const Dashboard = () => {
         },
         modal: {
           ondismiss: () => {
+            console.log('Payment modal dismissed');
             setProcessingPayment(false);
-          }
+          },
+          confirm_close: true
         }
       };
 
       const razorpay = new window.Razorpay(options);
+      
+      razorpay.on('payment.failed', (response) => {
+        console.error('Payment failed:', response.error);
+        alert(`Payment failed: ${response.error.description}`);
+        setProcessingPayment(false);
+      });
+
       razorpay.open();
 
     } catch (err) {
       console.error('Razorpay error:', err);
-      alert('Failed to initialize payment');
-    } finally {
+      alert(`Payment failed: ${err.response?.data?.details || err.message}`);
       setProcessingPayment(false);
     }
+  };
+
+  // Helper function to load Razorpay script dynamically
+  const loadRazorpayScript = () => {
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => {
+        console.log('Razorpay script loaded');
+        resolve();
+      };
+      script.onerror = () => {
+        console.error('Failed to load Razorpay script');
+        reject(new Error('Failed to load Razorpay script'));
+      };
+      document.body.appendChild(script);
+    });
   };
 
   const handleRegenerateApiKey = async () => {
@@ -270,15 +309,9 @@ const Dashboard = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
-  const formatIndianRupee = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 2
-    }).format(amount);
-  };
-
-  // Calculate document estimates based on credits
+  // FIXED: Calculate document estimates based on credits
+  // Formula: credits / cost per extraction = number of extractions
+  // Example: 116.50 / 0.10 = 1165 extractions ✅
   const estimatedDocuments = Math.floor(userData.credits / EXTRACTION_COST);
 
   // Loading state
@@ -392,23 +425,34 @@ const Dashboard = () => {
                   </div>
                   <h2 className="fw-bold mb-2">Add Credits</h2>
                   <p className="text-secondary small">Secure payment via Razorpay</p>
+                  
+                  {/* Debug info - remove in production */}
+                  <div className="mt-2 small text-muted">
+                    {window.Razorpay ? '✅ Razorpay loaded' : '⚠️ Razorpay not loaded'}
+                  </div>
                 </div>
 
                 <div className="mb-4">
                   <label className="form-label fw-semibold small text-uppercase">Select amount (INR)</label>
                   <div className="row g-3">
-                    {[100, 250, 500, 1000].map((amount) => (
-                      <div className="col-6" key={amount}>
-                        <button 
-                          className="btn w-100 border border-dark rounded-0 py-3 bg-white hover-lift"
-                          onClick={() => handleRazorpayPayment(amount)}
-                          disabled={processingPayment}
-                        >
-                          <span className="fw-bold">₹{amount}</span>
-                          <span className="d-block text-secondary small">≈ {Math.floor(amount * 100 / EXTRACTION_COST)} extractions</span>
-                        </button>
-                      </div>
-                    ))}
+                    {[100, 250, 500, 1000].map((amount) => {
+                      // FIXED: Calculate extractions correctly
+                      // ₹100 / ₹0.10 = 1000 extractions ✅
+                      const numExtractions = Math.floor(amount / EXTRACTION_COST);
+                      
+                      return (
+                        <div className="col-6" key={amount}>
+                          <button 
+                            className="btn w-100 border border-dark rounded-0 py-3 bg-white hover-lift"
+                            onClick={() => handleRazorpayPayment(amount)}
+                            disabled={processingPayment}
+                          >
+                            <span className="fw-bold">₹{amount}</span>
+                            <span className="d-block text-secondary small">≈ {numExtractions.toLocaleString()} extractions</span>
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -427,10 +471,10 @@ const Dashboard = () => {
                       className="btn btn-dark rounded-0 px-4"
                       onClick={() => {
                         const amount = document.getElementById('customAmount').value;
-                        if (amount && amount >= 5) {
+                        if (amount && amount >= 100) {
                           handleRazorpayPayment(parseFloat(amount));
                         } else {
-                          alert('Minimum amount is ₹5');
+                          alert('Minimum amount is ₹100');
                         }
                       }}
                       disabled={processingPayment}
@@ -529,7 +573,7 @@ const Dashboard = () => {
                 </button>
               </nav>
 
-              {/* Credit Info */}
+              {/* Credit Info - FIXED: Shows correct number of documents */}
               <div className="border border-dark p-3 mt-4">
                 <div className="text-secondary small">Available Credits</div>
                 <div className="d-flex align-items-baseline">
@@ -537,7 +581,7 @@ const Dashboard = () => {
                   <span className="text-secondary small ms-2">left</span>
                 </div>
                 <div className="text-secondary small mt-1">
-                  <span className="fw-bold">{estimatedDocuments}</span> document{estimatedDocuments !== 1 ? 's' : ''} remaining
+                  <span className="fw-bold">{estimatedDocuments.toLocaleString()}</span> document{estimatedDocuments !== 1 ? 's' : ''} remaining
                 </div>
                 <div className="text-secondary small">
                   (₹{EXTRACTION_COST.toFixed(2)} per extraction)
@@ -595,7 +639,7 @@ const Dashboard = () => {
                         </div>
                         <span className="text-secondary small">Total Extractions</span>
                       </div>
-                      <h3 className="fw-bold mb-1">{userData.totalExtractions}</h3>
+                      <h3 className="fw-bold mb-1">{userData.totalExtractions.toLocaleString()}</h3>
                       <p className="text-secondary small mb-0">All time processed</p>
                     </div>
                   </div>
@@ -705,7 +749,7 @@ const Dashboard = () => {
               </div>
             )}
 
-            {/* BILLING TAB */}
+            {/* BILLING TAB - FIXED: Shows correct extraction counts */}
             {activeTab === 'billing' && (
               <div>
                 {/* Credit Card */}
@@ -715,7 +759,7 @@ const Dashboard = () => {
                       <div className="text-secondary small mb-2">Current Balance</div>
                       <h1 className="display-4 fw-bold mb-2">₹{userData.credits.toFixed(2)}</h1>
                       <p className="text-secondary mb-0">
-                        ≈ {estimatedDocuments} document{estimatedDocuments !== 1 ? 's' : ''} remaining
+                        ≈ {estimatedDocuments.toLocaleString()} document{estimatedDocuments !== 1 ? 's' : ''} remaining
                       </p>
                       <p className="text-secondary small">
                         (₹{EXTRACTION_COST.toFixed(2)} per extraction)
@@ -734,7 +778,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                {/* Payment History */}
+                {/* Payment History - FIXED: Shows correct extraction counts */}
                 <div className="border border-dark p-4 bg-white">
                   <h5 className="fw-bold mb-4">Payment History</h5>
                   {paymentHistory.length > 0 ? (
@@ -750,20 +794,25 @@ const Dashboard = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {paymentHistory.map((item, index) => (
-                            <tr key={index}>
-                              <td className="py-3">{formatDate(item.createdAt)}</td>
-                              <td className="py-3 fw-bold">₹{item.amount}</td>
-                              <td className="py-3 text-secondary">{Math.floor(item.amount / EXTRACTION_COST)}</td>
-                              <td className="py-3 text-secondary">Razorpay</td>
-                              <td className="py-3">
-                                <span className="text-success small">
-                                  <i className="bi bi-check-circle-fill me-1"></i>
-                                  Completed
-                                </span>
-                              </td>
-                            </tr>
-                          ))}
+                          {paymentHistory.map((item, index) => {
+                            // FIXED: Calculate extractions correctly
+                            const numExtractions = Math.floor(item.amount / EXTRACTION_COST);
+                            
+                            return (
+                              <tr key={index}>
+                                <td className="py-3">{formatDate(item.createdAt)}</td>
+                                <td className="py-3 fw-bold">₹{item.amount}</td>
+                                <td className="py-3 text-secondary">{numExtractions.toLocaleString()}</td>
+                                <td className="py-3 text-secondary">Razorpay</td>
+                                <td className="py-3">
+                                  <span className="text-success small">
+                                    <i className="bi bi-check-circle-fill me-1"></i>
+                                    Completed
+                                  </span>
+                                </td>
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                     </div>
@@ -774,7 +823,7 @@ const Dashboard = () => {
               </div>
             )}
 
-            {/* API KEYS TAB */}
+            {/* API KEYS TAB - unchanged */}
             {activeTab === 'api' && (
               <div>
                 {/* Current API Key */}

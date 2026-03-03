@@ -678,8 +678,8 @@ const Documentation = () => {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="logo-section">
-          <div className="logo">DigiMithra</div>
-          <div className="logo-badge">AUTOFILL AI SDK</div>
+          <div className="logo">snyct</div>
+          <div className="logo-badge">AI DOCUMENT EXTRACTION SDK</div>
         </div>
 
         <nav className="nav-menu">
@@ -703,7 +703,7 @@ const Documentation = () => {
 
         <div className="sidebar-footer">
           <div className="footer-text">
-            <div>support@digimithra.com</div>
+            <div>support@snyct.com</div>
             <div className="version">v1.0.0</div>
           </div>
         </div>
@@ -720,7 +720,7 @@ const Documentation = () => {
 
             <Section title="How It Works">
               <p className="text">
-                DigiMithra Autofill AI SDK uses advanced AI to automatically extract structured data from any document. 
+                Snyct SDK uses advanced AI to automatically extract structured data from any document. 
                 Simply define the fields you need, upload your documents, and get back clean JSON data.
               </p>
               
@@ -785,8 +785,9 @@ const Documentation = () => {
 
             <Section title="Quick Example">
               <CodeBlock
-                code={`// Payload to send to SDK
-const data = await AutofillSDK.extract({
+                code={`import Snyct from "snyct-ai";
+
+const data = await Snyct.extract({
   apiKey: "YOUR_API_KEY",
   fields: {
     name: "",
@@ -830,7 +831,7 @@ const data = await AutofillSDK.extract({
 
             <Section title="Install via NPM">
               <CodeBlock
-                code="npm install digimithra-autofill-ai-sdk"
+                code="npm install snyct-ai"
                 language="bash"
                 id="install-npm"
               />
@@ -838,7 +839,7 @@ const data = await AutofillSDK.extract({
 
             <Section title="Install via Yarn">
               <CodeBlock
-                code="yarn add digimithra-autofill-ai-sdk"
+                code="yarn add snyct-ai"
                 language="bash"
                 id="install-yarn"
               />
@@ -846,14 +847,12 @@ const data = await AutofillSDK.extract({
 
             <Section title="Import SDK">
               <CodeBlock
-                code={`// ES6 Modules
-import { AutofillSDK } from 'digimithra-autofill-ai-sdk';
+                code={`// ES6 Modules (Browser/React/Vue/Angular)
+import Snyct from 'snyct-ai';
 
-// CommonJS
-const { AutofillSDK } = require('digimithra-autofill-ai-sdk');
-
-// CDN (Browser)
-<script src="https://cdn.jsdelivr.net/npm/digimithra-autofill-ai-sdk"></script>`}
+// CommonJS (Node.js/Express)
+const Snyct = require('snyct-ai').default;
+`}
                 language="javascript"
                 id="import-sdk"
               />
@@ -864,7 +863,7 @@ const { AutofillSDK } = require('digimithra-autofill-ai-sdk');
                 code={`// Initialize and use
 const extractData = async () => {
   try {
-    const result = await AutofillSDK.extract({
+    const result = await Snyct.extract({
       apiKey: "YOUR_API_KEY",
       fields: {
         name: "",
@@ -893,7 +892,9 @@ const extractData = async () => {
 
             <Section title="Basic Syntax">
               <CodeBlock
-                code={`const data = await AutofillSDK.extract({
+                code={`import Snyct from "snyct-ai";
+
+const data = await Snyct.extract({
   apiKey: "YOUR_API_KEY",           // Required: Your API key
   fields: {                          // Required: Fields to extract
     field1: "",                      // Simple field
@@ -910,7 +911,9 @@ const extractData = async () => {
             <Section title="Field-Level Instructions">
               <p className="text">Each field can have specific instructions for how the data should be formatted:</p>
               <CodeBlock
-                code={`const data = await AutofillSDK.extract({
+                code={`import Snyct from "snyct-ai";
+
+const data = await Snyct.extract({
   apiKey: "YOUR_API_KEY",
   fields: {
     // Date fields
@@ -942,7 +945,9 @@ const extractData = async () => {
             <Section title="Global Instructions">
               <p className="text">Global instructions apply to all fields and override field-level instructions:</p>
               <CodeBlock
-                code={`const data = await AutofillSDK.extract({
+                code={`import Snyct from "snyct-ai";
+
+const data = await Snyct.extract({
   apiKey: "YOUR_API_KEY",
   fields: {
     name: "",
@@ -960,14 +965,16 @@ const extractData = async () => {
 
             <Section title="Multiple Files Example">
               <CodeBlock
-                code={`// HTML Input
+                code={`import Snyct from "snyct-ai";
+
+// HTML Input
 <input type="file" multiple id="fileInput" />
 
 // JavaScript
 const fileInput = document.getElementById('fileInput');
 const files = Array.from(fileInput.files);
 
-const data = await AutofillSDK.extract({
+const data = await Snyct.extract({
   apiKey: "YOUR_API_KEY",
   fields: {
     name: "",
@@ -979,6 +986,40 @@ const data = await AutofillSDK.extract({
 });`}
                 language="javascript"
                 id="multiple-files"
+              />
+            </Section>
+
+            <Section title="Node.js / Express Example">
+              <CodeBlock
+                code={`const express = require('express');
+const multer = require('multer');
+const Snyct = require('snyct-ai').default;
+
+const app = express();
+const upload = multer({ dest: 'uploads/' });
+
+app.post('/extract', upload.single('document'), async (req, res) => {
+  try {
+    const result = await Snyct.extract({
+      apiKey: process.env.SNYCT_API_KEY,
+      fields: {
+        name: "",
+        documentNumber: "",
+        date: ""
+      },
+      files: req.files, // 🔥 pass full multer objects
+      instructions: "Extract all text fields"
+    });
+    
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.listen(3000);`}
+                language="javascript"
+                id="node-example"
               />
             </Section>
           </>
@@ -1022,10 +1063,10 @@ const data = await AutofillSDK.extract({
                       <td>Key-value pairs of fields to extract</td>
                     </tr>
                     <tr>
-                      <td><code>files</code></td>
-                      <td>Array[File]</td>
+                      <td><code>file</code> or <code>files</code></td>
+                      <td>File/Array[File]</td>
                       <td>Yes</td>
-                      <td>Array of file objects (max 10, 10MB each)</td>
+                      <td>Single file or array of files (max 10, 10MB each)</td>
                     </tr>
                     <tr>
                       <td><code>instructions</code></td>
@@ -1183,6 +1224,43 @@ city: "Return in Title Case"`}
                   />
                 </div>
               </div>
+            </Section>
+
+            <Section title="Complete Example">
+              <CodeBlock
+                code={`import Snyct from "snyct-ai";
+
+const data = await Snyct.extract({
+  apiKey: "7dae7e60-7934-45d9-8307-54e21a7c7a64",
+  fields: {
+    // Basic Fields
+    name: "",
+    phone: "",
+    address: "Extract full address from Aadhaar",
+    dob: "Return date in ISO UTC format like 2026-02-28T14:30:00Z",
+
+    // Passport Fields
+    passportNumber: "",
+    givenName: "",
+    surname: "",
+    fullName: "Extract full name from passport",
+    nationality: "",
+    gender: "",
+    placeOfBirth: "",
+    issueDate: "Return date in ISO UTC format",
+    expiryDate: "Return date in ISO UTC format",
+
+    // Aadhaar Fields
+    aadharNumber: "Extract Aadhaar number. It will be a 12 digit number",
+    enrollmentNumber: "",
+    aadhaarNameKannada: "Extract name written in Kannada from Aadhaar card",
+  },
+  instructions: "Extract exact values only. Do not guess.",
+  files: files, // Multiple file support
+});`}
+                language="javascript"
+                id="complete-example"
+              />
             </Section>
 
             <Section title="Instruction Examples">
