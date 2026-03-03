@@ -1,28 +1,8 @@
 {
-   "routes": [
-     {
-       "src": "/",
-       "dest": "/"
-     },
-     {
-       "src": "/policy",
-       "dest": "/"
-     },
-     {
-       "src": "/pricing",
-       "dest": "/"
-     },
-      {
-       "src": "/login",
-       "dest": "/"
-     },
-      {
-       "src": "/dashboard",
-       "dest": "/"
-     },
-     {
-       "src": "/view-account/(.*)",
-       "dest": "/"
-     }
-   ]
- }
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
