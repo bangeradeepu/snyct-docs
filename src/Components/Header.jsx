@@ -43,6 +43,16 @@ const Header = () => {
               </span>
             </Link>
 
+            <a
+             href="https://docs.snyct.com"
+             target="_blank"
+             style={{textDecoration:'none'}}
+              onClick={closeMenu}
+            >
+              <span className="me-4 text-dark text-decoration-none">
+                Documentatiom
+              </span>
+            </a>
             <Link
               to="/dashboard"
               style={{ textDecoration: "none" }}
@@ -161,7 +171,14 @@ const Header = () => {
             >
               <span className="text-dark fs-5">Dashboard</span>
             </Link>
-
+             <Link
+              to="http://docs.snyct.com"
+              style={{ textDecoration: "none" }}
+              onClick={closeMenu}
+              className="py-2 px-3 rounded hover-bg-light"
+            >
+              <span className="text-dark fs-5">Documentation</span>
+            </Link>
             <Link
               to="/login"
               style={{ textDecoration: "none" }}
