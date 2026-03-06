@@ -248,9 +248,9 @@ instructions: "Return all names in Title Case format."`;
               <h6 className="text-white fw-semibold mb-4" style={{ letterSpacing: '1px', fontSize: '14px' }}>LINKS</h6>
               <ul className="list-unstyled">
                 <li className="mb-3"><a href="#" className="footer-link">Home</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">Documentation</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">Pricing</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">Dashboard</a></li>
+                <li className="mb-3"><a href="https://docs.snyct.com" className="footer-link">Documentation</a></li>
+                <li className="mb-3"><a href="/pricing" className="footer-link">Pricing</a></li>
+                <li className="mb-3"><a href="/dashboard" className="footer-link">Dashboard</a></li>
               </ul>
             </div>
 
@@ -258,10 +258,9 @@ instructions: "Return all names in Title Case format."`;
             <div className="col-6 col-lg-2">
               <h6 className="text-white fw-semibold mb-4" style={{ letterSpacing: '1px', fontSize: '14px' }}>DEVELOPERS</h6>
               <ul className="list-unstyled">
-                <li className="mb-3"><a href="#" className="footer-link">API Reference</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">SDK Usage</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">Examples</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">Postman</a></li>
+                <li className="mb-3"><a href="https://docs.snyct.com" className="footer-link">API Reference</a></li>
+                <li className="mb-3"><a href="https://docs.snyct.com" className="footer-link">SDK Usage</a></li>
+
               </ul>
             </div>
 
@@ -269,10 +268,9 @@ instructions: "Return all names in Title Case format."`;
             <div className="col-6 col-lg-2">
               <h6 className="text-white fw-semibold mb-4" style={{ letterSpacing: '1px', fontSize: '14px' }}>COMMUNITY</h6>
               <ul className="list-unstyled">
-                <li className="mb-3"><a href="#" className="footer-link">Support</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">Contact</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">GitHub</a></li>
-                <li className="mb-3"><a href="#" className="footer-link">StackOverflow</a></li>
+                <li className="mb-3"><a href="https://github.com/bangeradeepu/snyct-docs" className="footer-link">Github- website</a></li>
+                <li className="mb-3"><a href="https://github.com/bangeradeepu/snyct-documentation" className="footer-link">Github-docs</a></li>
+                <li className="mb-3"><a href="https://github.com/bangeradeepu/snyct-sdk" className="footer-link">Github- SDK</a></li>
               </ul>
             </div>
           </div>
