@@ -427,9 +427,9 @@ const Dashboard = () => {
                   <p className="text-secondary small">Secure payment via Razorpay</p>
                   
                   {/* Debug info - remove in production */}
-                  <div className="mt-2 small text-muted">
+                  {/* <div className="mt-2 small text-muted">
                     {window.Razorpay ? '✅ Razorpay loaded' : '⚠️ Razorpay not loaded'}
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="mb-4">
