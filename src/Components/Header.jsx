@@ -50,7 +50,7 @@ const Header = () => {
               onClick={closeMenu}
             >
               <span className="me-4 text-dark text-decoration-none">
-                Documentatiom
+                Documentation
               </span>
             </a>
             <Link
