@@ -28,7 +28,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="d-none d-lg-flex ms-auto">
+          <div className="d-none d-lg-flex ms-auto align-items-center gap-4">
             <Link to="/" style={{ textDecoration: "none" }} onClick={closeMenu}>
               <span className="me-4 text-dark text-decoration-none">Home</span>
             </Link>
@@ -73,6 +73,14 @@ const Header = () => {
                 <span className="text-dark text-decoration-none">Login</span>
               </Link>
             )}
+             <div>
+              <a href="https://github.com/bangeradeepu/snyct-docs" target="_blank" style={{textDecoration:'none', color:'black'}} rel="noopener noreferrer">
+              <div className="d-flex gap-2 align-items-center">
+                <i className="bi bi-github c-pointer" style={{ fontSize: "2rem" }}></i>
+    
+              </div>
+              </a>
+            </div>
           </div>
 
           {/* Hamburger Menu Button - Visible on mobile */}
@@ -187,6 +195,14 @@ const Header = () => {
             >
               <span className="text-dark fs-5">Login</span>
             </Link>
+             <div>
+              <a href="https://github.com/bangeradeepu/snyct-docs" target="_blank" style={{textDecoration:'none', color:'black'}} rel="noopener noreferrer">
+              <div className="d-flex gap-2 align-items-center">
+                <i className="bi bi-github c-pointer" style={{ fontSize: "2rem" }}></i>
+            
+              </div>
+              </a>
+            </div>
           </div>
         </div>
       </div>
