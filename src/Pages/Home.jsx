@@ -103,50 +103,142 @@ instructions: "Return all names in Title Case format."`;
         </div>
       </div>
 
-      {/* DARK SDK SECTION - Black Background */}
-      <div className="bg-dark text-white py-5">
-        <div className="container uioo">
-          {/* Header */}
-          <div className="text-center mb-5">
-            <img src="./snyctWhite.png" className="mb-4 img-fluid img-premium-white" width={140} alt="" />
-            <h2 className="display-5 fw-bold mb-3" style={{ letterSpacing: '-0.5px' }}>
-              Extract structured data
-              <br className="d-none d-md-block" />
-              from any document
-            </h2>
-            <p className="text-white-50" style={{ fontSize: '18px' }}>
-              Extract structured data from any document with simple steps using Autofill SDK.
-            </p>
-          </div>
+      {/* DARK SDK SECTION - Enhanced Design */}
+<div className="bg-dark text-white py-5 position-relative overflow-hidden">
+  {/* Background gradient effect */}
+  <div className="position-absolute top-0 start-0 w-100 h-100 opacity-25" 
+    style={{
+      background: 'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)'
+    }}>
+  </div>
+  
+  <div className="container position-relative">
+    {/* Header with refined typography */}
+    <div className="text-center mb-5">
+      <img 
+        src="./snyctWhite.png" 
+        className="mb-4 img-fluid" 
+        width={120} 
+        alt="Snyct" 
+        style={{ opacity: 0.9 }}
+      />
+      <h2 className="display-4 fw-bold mb-3" style={{ letterSpacing: '-0.02em' }}>
+        Extract structured data
+        <br className="d-none d-md-block" />
+        <span className="text-gradient">from any document</span>
+      </h2>
+      <p className="text-white-50 mx-auto" style={{ 
+        fontSize: '1.25rem', 
+        maxWidth: '600px',
+        lineHeight: 1.6 
+      }}>
+        Transform unstructured documents into structured data with our powerful Autofill SDK. 
+        Simple integration, powerful results.
+      </p>
+    </div>
 
-          {/* Code Flow - Minimal Design */}
-          <div className="d-flex flex-column flex-md-row align-items-stretch justify-content-between gap-4">
-            <div className="flex-grow-1">
-              <CodeBlock code={inputData} />
-            </div>
-            
-            <div className="d-flex align-items-center">
-              <div className="border-top border-white border-2 w-100 d-md-none opacity-25"></div>
-              <div className="border-end border-white border-2 h-100 d-none d-md-block opacity-25"></div>
-            </div>
-            
-            <div className="d-flex align-items-center justify-content-center">
-              <div className="border border-white p-4 bg-white">
-                <img src="./snyct.png" width={160} alt="" className="img-fluid img-premium-black" />
-              </div>
-            </div>
-            
-            <div className="d-flex align-items-center">
-              <div className="border-top border-white border-2 w-100 d-md-none opacity-25"></div>
-              <div className="border-end border-white border-2 h-100 d-none d-md-block opacity-25"></div>
-            </div>
-            
-            <div className="flex-grow-1">
-              <CodeBlock code={outputData} />
-            </div>
+    {/* Code Flow - Enhanced Design */}
+    <div className="d-flex flex-column flex-lg-row align-items-stretch justify-content-between gap-4">
+      {/* Input Code Block */}
+      <div className="flex-grow-1" style={{ minWidth: 0 }}>
+        <div className="mb-2 d-flex align-items-center">
+          <span className="badge bg-secondary bg-opacity-25 text-white-50 px-3 py-2 rounded-pill">
+            <i className="bi bi-box-arrow-in-right me-2"></i>
+            Input
+          </span>
+        </div>
+        <div className="code-wrapper h-100">
+          <CodeBlock code={inputData} />
+        </div>
+      </div>
+      
+      {/* Arrow Connector - Improved */}
+      <div className="d-flex align-items-center justify-content-center px-3">
+        <div className="position-relative">
+          {/* Desktop arrow */}
+          <div className="d-none d-lg-block">
+            <div className="arrow-line"></div>
+            <div className="arrow-head"></div>
+          </div>
+          {/* Mobile arrow */}
+          <div className="d-lg-none">
+            <div className="arrow-line-vertical"></div>
+            <div className="arrow-head-down"></div>
           </div>
         </div>
       </div>
+      
+      {/* Logo Container - Enhanced */}
+      <div className="d-flex align-items-center justify-content-center">
+        <div className="logo-container p-4 bg-white rounded-4 shadow-lg">
+          <img 
+            src="./snyct.png" 
+            width={180} 
+            alt="Snyct" 
+            className="img-fluid"
+            style={{ 
+              filter: 'brightness(0)',
+              transition: 'transform 0.3s ease',
+              height: 'auto',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          />
+        </div>
+      </div>
+      
+      {/* Arrow Connector - Improved */}
+      <div className="d-flex align-items-center justify-content-center px-3">
+        <div className="position-relative">
+          {/* Desktop arrow */}
+          <div className="d-none d-lg-block">
+            <div className="arrow-line"></div>
+            <div className="arrow-head"></div>
+          </div>
+          {/* Mobile arrow */}
+          <div className="d-lg-none">
+            <div className="arrow-line-vertical"></div>
+            <div className="arrow-head-down"></div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Output Code Block */}
+      <div className="flex-grow-1" style={{ minWidth: 0 }}>
+        <div className="mb-2 d-flex align-items-center justify-content-end">
+          <span className="badge bg-primary bg-opacity-25 text-primary px-3 py-2 rounded-pill">
+            Output
+            <i className="bi bi-box-arrow-up-right ms-2"></i>
+          </span>
+        </div>
+        <div className="code-wrapper h-100">
+          <CodeBlock code={outputData} />
+        </div>
+      </div>
+    </div>
+
+    {/* Feature Tags - New Addition */}
+    <div className="d-flex flex-wrap justify-content-center gap-3 mt-5 pt-4">
+      <span className="badge bg-white bg-opacity-10 text-white-50 px-4 py-2 rounded-pill">
+        <i className="bi bi-lightning-charge me-2"></i>
+        Real-time Processing
+      </span>
+      <span className="badge bg-white bg-opacity-10 text-white-50 px-4 py-2 rounded-pill">
+        <i className="bi bi-shield-check me-2"></i>
+        Enterprise Security
+      </span>
+      <span className="badge bg-white bg-opacity-10 text-white-50 px-4 py-2 rounded-pill">
+        <i className="bi bi-code-slash me-2"></i>
+        5 Lines of Code
+      </span>
+      <span className="badge bg-white bg-opacity-10 text-white-50 px-4 py-2 rounded-pill">
+        <i className="bi bi-file-pdf me-2"></i>
+        50+ Document Formats
+      </span>
+    </div>
+  </div>
+</div>
+
 
       {/* FEATURES SECTION - Minimal Cards */}
       <div className="py-5">
@@ -323,6 +415,101 @@ instructions: "Return all names in Title Case format."`;
         .opacity-25 {
           opacity: 0.25;
         }
+          .text-gradient {
+    background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .code-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .code-wrapper:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .logo-container {
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .logo-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Arrow styles */
+  .arrow-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 100%);
+    position: relative;
+  }
+
+  .arrow-head {
+    position: absolute;
+    right: -8px;
+    top: -6px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid white;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+  }
+
+  .arrow-line-vertical {
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.2) 100%);
+    position: relative;
+  }
+
+  .arrow-head-down {
+    position: absolute;
+    bottom: -8px;
+    left: -6px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid white;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .display-4 {
+      font-size: 2.5rem;
+    }
+    
+    .code-wrapper {
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* Badge styles */
+  .badge {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Animation for arrows */
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  .arrow-line, .arrow-head, .arrow-line-vertical, .arrow-head-down {
+    animation: pulse 2s ease-in-out infinite;
+  }
       `}</style>
     </div>
   );
