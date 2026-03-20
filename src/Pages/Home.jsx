@@ -66,7 +66,7 @@ instructions: "Return all names in Title Case format."`;
             <div className="d-flex flex-column flex-sm-row gap-3">
               {/* NPM Command - Minimal Design */}
               <div className="border border-dark d-flex align-items-center px-3 py-2 bg-white hover-border" style={{ cursor: 'pointer' }} onClick={copyNpm}>
-                <div className="d-flex gap-3 align-items-center">
+                <div className="d-flex gap-4 align-items-center justify-content-between w-100">
                   <div className="d-flex gap-2 font-monospace" style={{ fontSize: '14px' }}>
                    <span className="span-pre">$</span>
                     <span className="span-npm">npm</span>
