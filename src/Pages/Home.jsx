@@ -49,11 +49,11 @@ instructions: "Return all names in Title Case format."`;
             </div>
 
             {/* Heading */}
-          <h1 className="heading fw-bold mb-4">
-            Extract Structured Data from Documents
-            <br className="d-none d-md-block" />
-            using AI SDK
-          </h1>
+        <h1 className="heading fw-bold mb-4">
+  Instruction-Based AI SDK
+  <br className="d-none d-md-block" />
+  for Smart Data Extraction
+</h1>
 
             {/* Description */}
             <p className="text-secondary mb-4" style={{ fontSize: '18px', maxWidth: '550px', lineHeight: '1.6' }}>
