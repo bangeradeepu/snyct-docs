@@ -9,6 +9,10 @@ lerna-debug.log*
 
 node_modules
 dist
+.claude
+.agents
+reference
+skills-lock.json
 dist-ssr
 *.local
 env
