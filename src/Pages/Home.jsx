@@ -821,9 +821,9 @@ instructions: "Return all names in Title Case format."`;
                 instruction-based AI extraction. Built for developers who need
                 flexible document parsing APIs.
               </p>
-              <div className="small text-white-50">
+              {/* <div className="small text-white-50">
                 © 2026 Digimithra Solutions
-              </div>
+              </div> */}
             </div>
 
             {/* Links */}
